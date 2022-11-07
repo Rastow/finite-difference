@@ -1,0 +1,13 @@
+site_name: finite-difference
+
+site_url: https://finite-difference.readthedocs.io/
+
+theme: readthedocs
+
+plugins:
+  - search
+  - mkdocstrings
+
+nav:
+  - Home: index.md
+  - Reference: reference.md
