@@ -25,7 +25,6 @@ plugins:
   - mkdocs-jupyter:
       execute: True
 
-
 nav:
   - Home: index.md
   - Reference: reference.md
