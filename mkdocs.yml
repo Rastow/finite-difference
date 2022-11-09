@@ -2,12 +2,32 @@ site_name: finite-difference
 
 site_url: https://finite-difference.readthedocs.io/
 
-theme: readthedocs
+theme:
+  name: readthedocs
+
+markdown_extensions:
+  - pymdownx.arithmatex
+
+extra_javascript:
+  - https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML
 
 plugins:
   - search
-  - mkdocstrings
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: false
+            docstring_style: numpy
+          import:
+            - https://docs.python.org/3/objects.inv
+            - https://numpy.org/doc/stable/objects.inv
+  - mkdocs-jupyter:
+      execute: True
+
 
 nav:
   - Home: index.md
   - Reference: reference.md
+  - Notebooks:
+      - tutorial.ipynb
