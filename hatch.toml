@@ -33,8 +33,9 @@ format = [
 [envs.docs]
 dependencies = [
     "mkdocs",
-    "mkdocstrings[python]",
-    "mkdocs-jupyter"
+    "mkdocs-gen-files",
+    "mkdocs-literate-nav",
+    "mkdocstrings[python]"
 ]
 [envs.docs.scripts]
 build = "mkdocs build --clean --strict"

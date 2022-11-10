@@ -3,16 +3,26 @@ site_name: finite-difference
 site_url: https://finite-difference.readthedocs.io/
 
 theme:
-  name: readthedocs
+  name: material
 
 markdown_extensions:
-  - pymdownx.arithmatex
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.arithmatex:
+      generic: true
+  - toc
 
 extra_javascript:
-  - https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 plugins:
   - search
+  - gen-files:
+      scripts:
+      - docs/gen_ref_pages.py
+  - literate-nav:
+      nav_file: SUMMARY.md
   - mkdocstrings:
       handlers:
         python:
@@ -22,11 +32,7 @@ plugins:
           import:
             - https://docs.python.org/3/objects.inv
             - https://numpy.org/doc/stable/objects.inv
-  - mkdocs-jupyter:
-      execute: True
 
 nav:
   - Home: index.md
-  - Reference: reference.md
-  - Notebooks:
-      - tutorial.ipynb
+  - Code Reference: reference/
