@@ -40,7 +40,8 @@ docs = [
     "mkdocs>=1.4",
     "mkdocs-gen-files>=0.4",
     "mkdocs-literate-nav>=0.5",
-    "mkdocstrings[python]>=0.19"
+    "mkdocstrings[python]>=0.19",
+    "mkdocs-material>8.5"
 ]
 
 [project.urls]

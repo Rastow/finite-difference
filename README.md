@@ -2,6 +2,7 @@
 
 [![PyPI - Version](https://img.shields.io/pypi/v/finite-difference.svg)](https://pypi.org/project/finite-difference)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/finite-difference.svg)](https://pypi.org/project/finite-difference)
+[![Documentation Status](https://readthedocs.org/projects/finite-difference/badge/?version=latest)](https://finite-difference.readthedocs.io/en/latest/?badge=latest)
 
 -----
 
