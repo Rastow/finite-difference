@@ -31,13 +31,8 @@ format = [
 ]
 
 [envs.docs]
-dependencies = [
-    "mkdocs-material",
-    "mkdocs",
-    "mkdocs-gen-files",
-    "mkdocs-literate-nav",
-    "mkdocstrings[python]"
-]
+features = ["docs"]
+
 [envs.docs.scripts]
 build = "mkdocs build --clean --strict"
 serve = "mkdocs serve --dev-addr localhost:8000"

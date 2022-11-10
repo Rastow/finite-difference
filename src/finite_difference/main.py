@@ -2,7 +2,9 @@
 import numpy as np
 
 
-def gaussian(x: np.ndarray, sigma: int | float = 1., mu: int | float = 0.) -> np.ndarray:
+def gaussian(
+    x: np.ndarray, sigma: int | float = 1.0, mu: int | float = 0.0
+) -> np.ndarray:
     r"""
     Represents a normalized gaussian function.
 
@@ -32,5 +34,8 @@ def gaussian(x: np.ndarray, sigma: int | float = 1., mu: int | float = 0.) -> np
     >>> fd.main.gaussian(x)
     array([0.39894228, 0.24197072, 0.05399097, 0.00443185])
     """
-    values = np.reciprocal(sigma * np.sqrt(2. * np.pi)) * np.exp(-(x - mu)**2 / (2 * sigma**2))
+    values = np.reciprocal(sigma * np.sqrt(2.0 * np.pi)) * np.exp(
+        -((x - mu) ** 2) / (2 * sigma**2)
+    )
     return values
+
