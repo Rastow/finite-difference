@@ -1,21 +1,31 @@
-import numpy as np
+import math
+import itertools
+import numpy
 
 
-def one_dimensional_coefficients(offsets: list[int | float], order: int) -> dict[int | float, float]:
-    matrix = np.vander(offsets, increasing=True).transpose()
-    right_hand_side = np.zeros_like(offsets)
-    right_hand_side[order] = np.math.factorial(order)
-    solution = np.linalg.solve(matrix, right_hand_side)
-    coefficients = {offset: solution[index] for index, offset in enumerate(offsets)}
-    return coefficients
+# n: order of vandermonde matrix
+# i: current row index (array indexing)
+# j: column index (array indexing)
+# raise error when not enough offsets are given
+# treat special case j = n
+def coefficients(m, h):
+    n = len(h)
+    j = m
+    column = []
+    for i in range(n):
+        sign = (-1) ** (n-(j+1))
+        indices_without_i = list(range(n))
+        del indices_without_i[i]
+        h_without_i = [h[index] for index in indices_without_i]
+        enumerator = elementary_symmetric_polynomial(n-(j+1), h_without_i)
+        denominator = math.prod([h[i] - h[index] for index in indices_without_i])
+        column.append(math.factorial(m) * sign * enumerator / denominator)
+    return column
 
 
-def one_dimensional_error(coefficients: dict[int | float, float], order: int, max_order: int):
-    offsets = np.array(list(coefficients.keys()))
-    weights = np.array(list(coefficients.values()))
-    power_series = np.vander(offsets, N=max_order, increasing=True)[:, order + 1:]
-    term_coefficients = np.array([np.math.factorial(x) for x in np.arange(order + 1, max_order)])
-    taylor_polynomials = power_series / term_coefficients
-    weighted_terms = taylor_polynomials * weights[:, np.newaxis]
-    error = np.sum(weighted_terms, axis=0)
-    return error
+# n: number of variables
+# k: degree
+def elementary_symmetric_polynomial(k, variables):
+    variable_combinations = itertools.combinations(variables, r=k)
+    terms = [math.prod(variables) for variables in variable_combinations]
+    return sum(terms)
