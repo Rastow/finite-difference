@@ -36,7 +36,10 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: True
   - pymdownx.details
-  - pymdownx.highlight
+  - pymdownx.highlight:
+      linenums_style: pymdownx-inline
+      use_pygments: True
+      pygments_lang_class: True
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences

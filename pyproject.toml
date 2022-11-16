@@ -53,6 +53,12 @@ Source = "https://github.com/Rastow/finite-difference"
 [tool.coverage.run]
 branch = true
 parallel = true
+source_pkgs = ["finite_difference", "tests"]
+omit = ["docs/*"]
+
+[tool.coverage.paths]
+hatch = ["src"]
+tests = ["tests"]
 
 [tool.black]
 line-length = 120

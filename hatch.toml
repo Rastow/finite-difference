@@ -7,8 +7,9 @@ dependencies = [
     "pytest-cov",
 ]
 [envs.default.scripts]
-cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=src/finite_difference --cov=tests {args}"
-doctest = "pytest --doctest-modules --doctest-continue-on-failure"
+# --cov must not come before an argument in order to use the sources defined by config
+cov = "pytest --cov --cov-report=term-missing --cov-config=pyproject.toml {args}"
+doctest = "pytest --cov --doctest-modules --doctest-continue-on-failure --ignore=docs {args}"
 
 [[envs.test.matrix]]
 python = ["310", "311"]
