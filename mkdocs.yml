@@ -1,16 +1,49 @@
 site_name: finite-difference
-
+site_description: Numerical derivatives using Python
+site_author: Robert Grzonka
 site_url: https://finite-difference.readthedocs.io/
+repo_name: Rastow/finite-difference
+repo_url: https://github:com/Rastow/finite-difference
+edit_uri: blob/master/docs
+copyright: Copyright &copy; 2022 Robert Grzonka
 
 theme:
   name: material
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    primary: teal
+    accent: teal
+    toggle:
+      icon: material/weather-sunny
+      name: Switch to dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    primary: teal
+    accent: teal
+    toggle:
+      icon: material/weather-night
+      name: Switch to light mode
 
 markdown_extensions:
-  - pymdownx.superfences
-  - pymdownx.highlight
+  - admonition
+  - footnotes
+  - tables
+  - toc:
+      permalink: True
   - pymdownx.arithmatex:
-      generic: true
-  - toc
+      generic: True
+  - pymdownx.details
+  - pymdownx.highlight:
+      linenums_style: pymdownx-inline
+      use_pygments: True
+      pygments_lang_class: True
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed
 
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
@@ -18,16 +51,17 @@ extra_javascript:
 
 plugins:
   - search
+  - section-index
   - gen-files:
       scripts:
       - docs/gen_ref_pages.py
   - literate-nav:
-      nav_file: SUMMARY.md
+      nav_file: summary.md
   - mkdocstrings:
       handlers:
         python:
           options:
-            show_source: false
+            show_source: True
             docstring_style: numpy
           import:
             - https://docs.python.org/3/objects.inv
@@ -36,3 +70,12 @@ plugins:
 nav:
   - Home: index.md
   - Code Reference: reference/
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Rastow
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/user/Rastow/
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/MrRastow

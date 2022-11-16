@@ -41,7 +41,8 @@ docs = [
     "mkdocs-gen-files>=0.4",
     "mkdocs-literate-nav>=0.5",
     "mkdocstrings[python]>=0.19",
-    "mkdocs-material>8.5"
+    "mkdocs-material>=8.5",
+    "mkdocs-section-index>=0.3"
 ]
 
 [project.urls]
@@ -52,6 +53,15 @@ Source = "https://github.com/Rastow/finite-difference"
 [tool.coverage.run]
 branch = true
 parallel = true
+source_pkgs = ["finite_difference", "tests"]
+omit = ["docs/*"]
+
+[tool.coverage.paths]
+hatch = ["src"]
+tests = ["tests"]
+
+[tool.black]
+line-length = 120
 
 [tool.isort]
 profile = "black"
