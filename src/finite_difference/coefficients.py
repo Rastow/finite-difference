@@ -1,10 +1,10 @@
-import math
 import itertools
+import math
 
 
 def coefficients(m: int, s: list[float | int]):
     r"""
-    Computes the finite difference coefficients given a one dimensional stencil.
+    Computes the finite difference coefficients for a given one dimensional stencil.
 
     Parameters
     ----------
@@ -20,14 +20,16 @@ def coefficients(m: int, s: list[float | int]):
 
     Notes
     -----
+    The coefficients are obtained by solving following linear equation system.
     $$
-    \left(
-    \begin{matrix}
-    1 & x & x^2 \\
-    1 & y & y^2 \\
-    1 & z & z^2 \\
-    \end{matrix}
-    \right)
+    \begin{pmatrix}
+        1 & 1 & \cdots & 1 \\
+        c_1^1 & c_2^1 & \cdots & c_n^1 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        s_1^{n-1} & s_2^{n-1} \cdots & s_n^{n-1} \\
+    \end{pmatrix}
+    \begin{pmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \\ \end{pmatrix}
+    = m! \begin{pmatrix} \delta_{0,m} \\ \vdots \\ \delta_{i,m} \\ \vdots \\ \end{pmatrix}
     $$
 
     Examples
@@ -55,6 +57,50 @@ def coefficients(m: int, s: list[float | int]):
 
 
 def inverse_vandermonde_matrix_element(i: int, j: int, x: list[float | int]):
+    r"""
+    Computes the inverse Vandermonde matrix element $b_{ij}$.
+
+    !!! note
+        This function uses array indexing, meaning parameters `i` and `j` start with index `0`.
+
+    Parameters
+    ----------
+    i : int
+        Row index of the matrix element.
+    j : int
+        Column index of the matrix element.
+    x : list[float | int]
+        List of variables.
+
+    Returns
+    -------
+    b_ij : float
+        Matrix element of the inverse Vandermonde matrix.
+
+    Notes
+    -----
+    Following equation is used to calculate the matrix element.
+    $$
+    b_{ij} =
+    \begin{cases}
+        \left( -1 \right) ^{n-j}
+        \dfrac{
+            \sum_{ \substack{ 1 \le m_1 < \ldots < m_{n-j} \le n \\ m_1, \ldots, m_{n-j} \ne i } }
+            x_{m_1} \cdots x_{m_{n-j}}
+        }{
+            \prod_{ \substack{ 1 \le m \le n \\ m \ne i } }
+            {x_m - x_i}
+        } & : 1 \le j < n \\
+        \qquad \qquad \qquad
+        \dfrac{
+            1
+        }{
+            \prod_{ \substack{ 1 \le m \le n \\ m \ne i } }
+            {x_i - x_m}
+        } & : j = n
+    \end{cases}
+    $$
+    """
     n = len(x)
     indices_without_i = list(range(n))
     del indices_without_i[i]
@@ -65,10 +111,33 @@ def inverse_vandermonde_matrix_element(i: int, j: int, x: list[float | int]):
     else:
         enumerator = elementary_symmetric_polynomial(n - (j + 1), x_without_i)
     denominator = math.prod([x[i] - x[index] for index in indices_without_i])
-    return sign * enumerator / denominator
+    b_ij = sign * enumerator / denominator
+    return b_ij
 
 
 def elementary_symmetric_polynomial(k: int, x: list[float | int]):
+    r"""
+    Computes the value of the elementary symmetric polynomial $e_k( x_1, \cdots, x_n )$.
+
+    Parameters
+    ----------
+    k : int
+        Order.
+    x : list[float | int]
+        List of variables.
+
+    Returns
+    -------
+    e_k : float
+        Value of the elementary symmetric polynomial.
+
+    Notes
+    -----
+    The elementary symmetric polynomial is defined as follows.
+    $$
+    e_k( x_1, \cdots, x_n ) = \sum_{ 1 \le m_1 < \le m_2 < \ldots < m_{k} \le n } x_{m_1} \cdots x_{m_k}
+    $$
+    """
     x_comb = itertools.combinations(x, r=k)
-    terms = [math.prod(x) for x in x_comb]
-    return sum(terms)
+    e_k = sum([math.prod(x) for x in x_comb])
+    return e_k
