@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "finite-difference"
-description = 'Numerical derivatives.'
+description = 'Numerical derivatives using Python.'
 readme = "README.md"
 requires-python = ">=3.10"
 license = "BSD-3-Clause"
@@ -54,10 +54,9 @@ Source = "https://github.com/Rastow/finite-difference"
 branch = true
 parallel = true
 source_pkgs = ["finite_difference", "tests"]
-omit = ["docs/*"]
 
 [tool.coverage.paths]
-hatch = ["src"]
+finite_difference = ["src/finite_difference"]
 tests = ["tests"]
 
 [tool.black]

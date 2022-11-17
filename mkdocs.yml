@@ -1,16 +1,20 @@
 site_name: finite-difference
+site_url: https://finite-difference.readthedocs.io/
 site_description: Numerical derivatives using Python
 site_author: Robert Grzonka
-site_url: https://finite-difference.readthedocs.io/
 repo_name: Rastow/finite-difference
-repo_url: https://github:com/Rastow/finite-difference
-edit_uri: blob/master/docs
+repo_url: https://github:com/Rastow/finite-difference/
+edit_uri: blob/master/docs/
 copyright: Copyright &copy; 2022 Robert Grzonka
 
 theme:
   name: material
   icon:
+    edit: material/file-edit-outline
     repo: fontawesome/brands/github
+  features:
+    - navigation.tabs
+    - navigation.top
   palette:
   - media: "(prefers-color-scheme: light)"
     scheme: default
@@ -32,14 +36,14 @@ markdown_extensions:
   - footnotes
   - tables
   - toc:
-      permalink: True
+      permalink: true
   - pymdownx.arithmatex:
-      generic: True
+      generic: true
   - pymdownx.details
   - pymdownx.highlight:
       linenums_style: pymdownx-inline
-      use_pygments: True
-      pygments_lang_class: True
+      use_pygments: true
+      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
@@ -51,18 +55,20 @@ extra_javascript:
 
 plugins:
   - search
-  - section-index
   - gen-files:
       scripts:
       - docs/gen_ref_pages.py
   - literate-nav:
       nav_file: summary.md
+  - section-index
   - mkdocstrings:
       handlers:
         python:
           options:
-            show_source: True
             docstring_style: numpy
+            members_order: source
+            show_signature_annotations: true
+            show_source: false
           import:
             - https://docs.python.org/3/objects.inv
             - https://numpy.org/doc/stable/objects.inv
@@ -79,3 +85,8 @@ extra:
       link: https://pypi.org/user/Rastow/
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/MrRastow
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:<robert.grzonka@fau.de>
+
+watch:
+  - src

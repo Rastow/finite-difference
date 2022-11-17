@@ -16,17 +16,16 @@ def coefficients(m: int, s: list[float | int]):
     Returns
     -------
     c : list[float]
-        List of finite difference coefficients. Same ordering as points defined in `s`.
+        List of finite difference coefficients.
 
     Notes
     -----
-    The coefficients are obtained by solving following linear equation system.
     $$
     \begin{pmatrix}
         1 & 1 & \cdots & 1 \\
-        c_1^1 & c_2^1 & \cdots & c_n^1 \\
+        s_1^1 & s_2^1 & \cdots & s_n^1 \\
         \vdots & \vdots & \ddots & \vdots \\
-        s_1^{n-1} & s_2^{n-1} \cdots & s_n^{n-1} \\
+        s_1^{n-1} & s_2^{n-1} & \cdots & s_n^{n-1} \\
     \end{pmatrix}
     \begin{pmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \\ \end{pmatrix}
     = m! \begin{pmatrix} \delta_{0,m} \\ \vdots \\ \delta_{i,m} \\ \vdots \\ \end{pmatrix}
@@ -34,7 +33,6 @@ def coefficients(m: int, s: list[float | int]):
 
     Examples
     --------
-    Import the function.
     >>> from finite_difference.coefficients import coefficients
 
     The coefficients of the well known three point stencil for the second derivative can be calculated as follows.
@@ -60,9 +58,6 @@ def inverse_vandermonde_matrix_element(i: int, j: int, x: list[float | int]):
     r"""
     Computes the inverse Vandermonde matrix element $b_{ij}$.
 
-    !!! note
-        This function uses array indexing, meaning parameters `i` and `j` start with index `0`.
-
     Parameters
     ----------
     i : int
@@ -79,25 +74,18 @@ def inverse_vandermonde_matrix_element(i: int, j: int, x: list[float | int]):
 
     Notes
     -----
-    Following equation is used to calculate the matrix element.
     $$
     b_{ij} =
     \begin{cases}
         \left( -1 \right) ^{n-j}
-        \dfrac{
-            \sum_{ \substack{ 1 \le m_1 < \ldots < m_{n-j} \le n \\ m_1, \ldots, m_{n-j} \ne i } }
-            x_{m_1} \cdots x_{m_{n-j}}
+        & \dfrac{
+            \sum\limits_{ \substack{ 1 \le m_1 < \ldots < m_{n-j} \le n \\ m_1, \ldots, m_{n-j} \ne i } }
+            x_{m_1} \cdots x_{m_{n-j}
+        }
         }{
-            \prod_{ \substack{ 1 \le m \le n \\ m \ne i } }
-            {x_m - x_i}
-        } & : 1 \le j < n \\
-        \qquad \qquad \qquad
-        \dfrac{
-            1
-        }{
-            \prod_{ \substack{ 1 \le m \le n \\ m \ne i } }
-            {x_i - x_m}
-        } & : j = n
+            \prod\limits_{ \substack{ 1 \le m \le n \\ m \ne i }
+        } {x_m - x_i} } & : 1 \le j < n \cr
+        & \dfrac{1}{ \prod\limits_{ \substack{ 1 \le m \le n \\ m \ne i } } {x_i - x_m} } & : j = n \cr
     \end{cases}
     $$
     """
@@ -133,10 +121,7 @@ def elementary_symmetric_polynomial(k: int, x: list[float | int]):
 
     Notes
     -----
-    The elementary symmetric polynomial is defined as follows.
-    $$
-    e_k( x_1, \cdots, x_n ) = \sum_{ 1 \le m_1 < \le m_2 < \ldots < m_{k} \le n } x_{m_1} \cdots x_{m_k}
-    $$
+    $$ e_k( x_1, \cdots, x_n ) = \sum_{ 1 \le m_1 < m_2 < \ldots < m_{k} \le n } x_{m_1} \cdots x_{m_k} $$
     """
     x_comb = itertools.combinations(x, r=k)
     e_k = sum([math.prod(x) for x in x_comb])
