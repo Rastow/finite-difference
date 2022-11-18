@@ -3,7 +3,7 @@ site_url: https://finite-difference.readthedocs.io/
 site_description: Numerical derivatives using Python
 site_author: Robert Grzonka
 repo_name: Rastow/finite-difference
-repo_url: https://github:com/Rastow/finite-difference/
+repo_url: https://github.com/Rastow/finite-difference/
 edit_uri: blob/master/docs/
 copyright: Copyright &copy; 2022 Robert Grzonka
 
