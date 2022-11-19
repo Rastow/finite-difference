@@ -22,8 +22,9 @@ for path in sorted(Path("src").rglob("*.py")):
     nav[parts] = doc_path.as_posix()
 
     with mkdocs_gen_files.open(full_doc_path, "w") as fd:
+        header = "---\nhide:\n  -toc\n---\n"
         ident = ".".join(parts)
-        fd.write(f"::: {ident}")
+        fd.write(f"{header}::: {ident}")
 
     mkdocs_gen_files.set_edit_path(full_doc_path, Path("../") / path)
 
