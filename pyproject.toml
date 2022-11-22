@@ -31,7 +31,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Mathematics"
 ]
 dependencies = [
-    "numpy"
+    "numpy>=1.23"
 ]
 dynamic = ["version"]
 
@@ -44,23 +44,46 @@ docs = [
     "mkdocs-material>=8.5",
     "mkdocs-section-index>=0.3"
 ]
+notebooks = [
+    "jupyter>=1.0"
+]
+lint = [
+    "black>=22.10",
+    "mypy>=0.991",
+    "ruff>=0.0.133"
+]
+test = [
+    "pytest>=7.2",
+    "pytest-cov>=4.0"
+]
 
 [project.urls]
 Documentation = "https://finite-difference.readthedocs.io/"
 Tracker = "https://github.com/Rastow/finite-difference/issues"
 Source = "https://github.com/Rastow/finite-difference"
 
-[tool.coverage.run]
-branch = true
-parallel = true
-source_pkgs = ["finite_difference", "tests"]
-
-[tool.coverage.paths]
-finite_difference = ["src/finite_difference"]
-tests = ["tests"]
-
 [tool.black]
 line-length = 120
 
-[tool.isort]
-profile = "black"
+[tool.mypy]
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+follow_imports = "normal"
+ignore_missing_imports = true
+pretty = true
+show_column_numbers = true
+show_error_codes = true
+warn_no_return = false
+warn_unused_ignores = true
+
+[tool.ruff]
+line-length = 120
+
+[tool.pytest.ini_options]
+testpaths = [
+    "src/finite_difference",
+    "tests"
+]
+
+[tool.coverage.run]
+branch = true

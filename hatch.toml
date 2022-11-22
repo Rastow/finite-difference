@@ -1,34 +1,34 @@
 [version]
 path = "src/finite_difference/__init__.py"
 
-[envs.default]
-dependencies = [
-    "pytest",
-    "pytest-cov",
-]
-[envs.default.scripts]
+[envs.test]
+features = ["test"]
+
+[envs.test.scripts]
 # --cov must not come before an argument in order to use the sources defined by config
 cov = "pytest --cov --cov-report=term-missing --cov-config=pyproject.toml {args}"
-doctest = "pytest --cov --doctest-modules --doctest-continue-on-failure --ignore=docs {args}"
+doctest = "pytest --cov --doctest-modules --doctest-continue-on-failure {args}"
 
 [[envs.test.matrix]]
-python = ["310", "311"]
+python = ["3.10", "3.11"]
 
-[envs.style]
+[envs.lint]
+features = ["lint"]
 detached = true
-dependencies = [
-    "black",
-    "isort",
-]
 
-[envs.style.scripts]
+[envs.lint.scripts]
+typing = "mypy --install-types --non-interactive {args:src/finite_difference tests}"
 check = [
-    "black --check --diff .",
-    "isort --check-only --diff .",
+    "ruff {args:.}",
+    "black --check --diff {args:.}"
 ]
 format = [
-    "isort .",
-    "black .",
+    "black {args:.}",
+    "ruff --fix {args:.}"
+]
+all = [
+    "format",
+    "typing"
 ]
 
 [envs.docs]

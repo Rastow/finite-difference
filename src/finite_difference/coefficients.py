@@ -2,7 +2,7 @@ import itertools
 import math
 
 
-def coefficients(m: int, s: list[float | int]):
+def coefficients(m: int, s: list[float | int]) -> list[float]:
     r"""
     Computes the finite difference coefficients for a given one dimensional stencil.
 
@@ -54,7 +54,7 @@ def coefficients(m: int, s: list[float | int]):
     return c
 
 
-def inverse_vandermonde_matrix_element(i: int, j: int, x: list[float | int]):
+def inverse_vandermonde_matrix_element(i: int, j: int, x: list[float | int]) -> float:
     r"""
     Computes the inverse Vandermonde matrix element $b_{ij}$.
 
@@ -95,7 +95,7 @@ def inverse_vandermonde_matrix_element(i: int, j: int, x: list[float | int]):
     x_without_i = [x[index] for index in indices_without_i]
     sign = (-1) ** (n - (j + 1))
     if j == n:
-        enumerator = 1
+        enumerator = 1.
     else:
         enumerator = elementary_symmetric_polynomial(n - (j + 1), x_without_i)
     denominator = math.prod([x[i] - x[index] for index in indices_without_i])
@@ -103,7 +103,7 @@ def inverse_vandermonde_matrix_element(i: int, j: int, x: list[float | int]):
     return b_ij
 
 
-def elementary_symmetric_polynomial(k: int, x: list[float | int]):
+def elementary_symmetric_polynomial(k: int, x: list[float | int]) -> float | int:
     r"""
     Computes the value of the elementary symmetric polynomial $e_k( x_1, \cdots, x_n )$.
 
