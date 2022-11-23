@@ -66,15 +66,13 @@ Source = "https://github.com/Rastow/finite-difference"
 line-length = 120
 
 [tool.mypy]
-disallow_untyped_defs = false
-disallow_incomplete_defs = false
-follow_imports = "normal"
-ignore_missing_imports = true
+Upignore_missing_imports = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
 pretty = true
 show_column_numbers = true
 show_error_codes = true
-warn_no_return = false
-warn_unused_ignores = true
 
 [tool.ruff]
 line-length = 120

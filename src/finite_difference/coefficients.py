@@ -95,7 +95,7 @@ def inverse_vandermonde_matrix_element(i: int, j: int, x: list[float | int]) -> 
     x_without_i = [x[index] for index in indices_without_i]
     sign = (-1) ** (n - (j + 1))
     if j == n:
-        enumerator = 1.
+        enumerator = 1.0
     else:
         enumerator = elementary_symmetric_polynomial(n - (j + 1), x_without_i)
     denominator = math.prod([x[i] - x[index] for index in indices_without_i])

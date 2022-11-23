@@ -1,10 +1,10 @@
 [version]
 path = "src/finite_difference/__init__.py"
 
-[envs.test]
+[envs.default]
 features = ["test"]
 
-[envs.test.scripts]
+[envs.default.scripts]
 # --cov must not come before an argument in order to use the sources defined by config
 cov = "pytest --cov --cov-report=term-missing --cov-config=pyproject.toml {args}"
 doctest = "pytest --cov --doctest-modules --doctest-continue-on-failure {args}"
