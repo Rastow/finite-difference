@@ -48,9 +48,9 @@ notebooks = [
     "jupyter>=1.0"
 ]
 lint = [
-    "black>=22.10",
+    "black[jupyter]>=22.10",
     "mypy>=0.991",
-    "ruff>=0.0.133"
+    "ruff>=0.0.149"
 ]
 test = [
     "pytest>=7.2",
@@ -66,7 +66,8 @@ Source = "https://github.com/Rastow/finite-difference"
 line-length = 120
 
 [tool.mypy]
-Upignore_missing_imports = true
+ignore_missing_imports = true
+disallow_any_generics = true
 disallow_untyped_calls = true
 disallow_untyped_defs = true
 disallow_incomplete_defs = true
@@ -76,6 +77,27 @@ show_error_codes = true
 
 [tool.ruff]
 line-length = 120
+select = [
+  "A",
+  "B",
+  "C",
+  "E",
+  "F",
+  "FBT",
+  "I",
+  "M",
+  "N",
+  "Q",
+  "RUF",
+  "S",
+  "T",
+  "U",
+  "W",
+  "YTT",
+]
+
+[tool.ruff.isort]
+known-first-party = ["finite_difference"]
 
 [tool.pytest.ini_options]
 testpaths = [
