@@ -33,18 +33,18 @@ def coefficients(m: int, s: list[float | int]) -> list[float]:
 
     Examples
     --------
-    >>> from finite_difference.coefficients import coefficients
+    >>> import finite_difference as fd
 
     The coefficients of the well known three point stencil for the second derivative can be calculated as follows.
     >>> order = 2
     >>> stencil = list(range(-1, 2))
-    >>> coefficients(order, stencil)
+    >>> fd.coefficients(order, stencil)
     [1.0, -2.0, 1.0]
 
     Higher accuracy can be achieved by including more points in the stencil.
     >>> order = 1
     >>> stencil = list(range(-3, 4))
-    >>> coefficients(order, stencil)
+    >>> fd.coefficients(order, stencil)
     [-0.016666666666666666, 0.15, -0.75, -0.0, 0.75, -0.15, 0.016666666666666666]
     """
     n = len(s)

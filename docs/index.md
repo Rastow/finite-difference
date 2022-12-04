@@ -1,3 +1,3 @@
 # Welcome to finite-difference
 
-Numerical derivatives.
+Numerical derivatives using Python.
