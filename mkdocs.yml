@@ -72,6 +72,7 @@ plugins:
           import:
             - https://docs.python.org/3/objects.inv
             - https://numpy.org/doc/stable/objects.inv
+            - http://docs.scipy.org/doc/scipy/objects.inv
 
 nav:
   - Home: index.md

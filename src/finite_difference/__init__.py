@@ -1,3 +1,6 @@
+"""Numerical derivatives using the finite difference method."""
 __version__ = "0.0.1"
 
-from finite_difference.coefficients import coefficients
+from .coefficients import coefficients
+
+__all__ = ["coefficients"]

@@ -1,10 +1,13 @@
+"""Module for computing the finite difference coefficients."""
+
+__all__ = ["coefficients", "elementary_symmetric_polynomial", "inverse_vandermonde_matrix_element"]
+
 import itertools
 import math
 
 
 def coefficients(m: int, s: list[float | int]) -> list[float]:
-    r"""
-    Computes the finite difference coefficients for a given one dimensional stencil.
+    r"""Computes the finite difference coefficients for a given one dimensional stencil.
 
     Parameters
     ----------
@@ -50,13 +53,11 @@ def coefficients(m: int, s: list[float | int]) -> list[float]:
     n = len(s)
     if m >= n:
         raise ValueError("number of offsets must be greater than order of the derivative")
-    c = [inverse_vandermonde_matrix_element(i, m, s) * math.factorial(m) for i in range(n)]
-    return c
+    return [inverse_vandermonde_matrix_element(i, m, s) * math.factorial(m) for i in range(n)]
 
 
 def inverse_vandermonde_matrix_element(i: int, j: int, x: list[float | int]) -> float:
-    r"""
-    Computes the inverse Vandermonde matrix element $b_{ij}$.
+    r"""Computes the inverse Vandermonde matrix element $b_{ij}$.
 
     Parameters
     ----------
@@ -99,13 +100,11 @@ def inverse_vandermonde_matrix_element(i: int, j: int, x: list[float | int]) -> 
     else:
         enumerator = elementary_symmetric_polynomial(n - (j + 1), x_without_i)
     denominator = math.prod([x[i] - x[index] for index in indices_without_i])
-    b_ij = sign * enumerator / denominator
-    return b_ij
+    return sign * enumerator / denominator
 
 
 def elementary_symmetric_polynomial(k: int, x: list[float | int]) -> float | int:
-    r"""
-    Computes the value of the elementary symmetric polynomial $e_k( x_1, \cdots, x_n )$.
+    r"""Computes the value of the elementary symmetric polynomial $e_k( x_1, \cdots, x_n )$.
 
     Parameters
     ----------
@@ -124,5 +123,4 @@ def elementary_symmetric_polynomial(k: int, x: list[float | int]) -> float | int
     $$ e_k( x_1, \cdots, x_n ) = \sum_{ 1 \le m_1 < m_2 < \ldots < m_{k} \le n } x_{m_1} \cdots x_{m_k} $$
     """
     x_comb = itertools.combinations(x, r=k)
-    e_k = sum([math.prod(x) for x in x_comb])
-    return e_k
+    return sum([math.prod(x) for x in x_comb])

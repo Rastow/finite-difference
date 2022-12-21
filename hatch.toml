@@ -20,15 +20,15 @@ detached = true
 typing = "mypy --install-types --non-interactive {args:src/finite_difference tests}"
 check = [
     "ruff {args:.}",
-    "black --check --diff {args:.}"
+    "black --check --diff {args:.}",
 ]
 format = [
     "black {args:.}",
-    "ruff --fix {args:.}"
+    "ruff --fix {args:.}",
 ]
 all = [
     "format",
-    "typing"
+    "typing",
 ]
 
 [envs.docs]
